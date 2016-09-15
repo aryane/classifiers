@@ -24,7 +24,8 @@ class classifiers_comp():
         desc = []
         for i in hist[0]:
             desc.append(i)
-        return(" ".join(str(x) for x in desc))
+        normalized = desc / np.linalg.norm(desc)
+        return(" ".join(str(x) for x in normalized))
 
 
     def generate_complete_base(self, file_name):
