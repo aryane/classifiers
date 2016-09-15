@@ -10,9 +10,9 @@ do
   cat train$i | grep -o '.$' > train${i}-labels
   cat test$i | grep -o '.$' > test${i}-labels
 
-  cat train$i | cut -d" " -f1-50 > temp
+  cat train$i | cut -d" " -f1-100 > temp
   mv temp train${i}
-  cat test$i | cut -d" " -f1-50 > temp
+  cat test$i | cut -d" " -f1-100 > temp
   mv temp test${i}
 done
 
