@@ -1,0 +1,16 @@
+32 caracteristicas
+
+aryane@saganclassifiers$ python knn_cv.py cb-no-label cb-labels
+Accuracy: 0.55 (+/- 0.01)
+('acc pred ', 0.57037688166135592)
+
+aryane@saganclassifiers$ python dtree_cv.py cb-no-label cb-labels
+Accuracy: 0.50 (+/- 0.01)
+('acc pred ', 0.50609823096363038)
+aryane@saganclassifiers$ python naivebayes_cv.py cb-no-label cb-labels
+
+Accuracy: 0.38 (+/- 0.01)
+('acc pred ', 0.38127678277112403)
+
+
+
