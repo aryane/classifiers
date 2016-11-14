@@ -1,0 +1,15 @@
+caracteristica: 18
+
+knn 10
+Accuracy: 0.56 (+/- 0.02)
+('acc pred ', 0.58037578288100211)
+
+dtree max_features=18, max_depth=11
+aryane@saganclassifiers$ python dtree_cv.py cb-no-label cb-labels
+Accuracy: 0.51 (+/- 0.02)
+('acc pred ', 0.51477859575870788)
+
+aryane@saganclassifiers$ python naivebayes_cv.py cb-no-label cb-labels
+Accuracy: 0.38 (+/- 0.02)
+('acc pred ', 0.38413361169102295)
+

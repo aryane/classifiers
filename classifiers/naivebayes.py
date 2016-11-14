@@ -3,7 +3,7 @@
 
 import numpy as np
 from sklearn.naive_bayes import GaussianNB
-from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 import sys
 
 class naive_bayes():
@@ -25,6 +25,7 @@ class naive_bayes():
         #print(clf.predict(tst[20])[0], tst_label[20])
         res = clf.predict(tst)
 
+        print(classification_report(tst_label, res))
         print(confusion_matrix(tst_label, res))
         print(accuracy_score(tst_label, res))
 

@@ -1,0 +1,20 @@
+uniform
+
+24 features
+
+5
+aryane@saganclassifiers$ python knn_cv.py cb-no-label cb-labels
+Accuracy: 0.51 (+/- 0.01)
+('acc pred ', 0.53829249533018353)
+
+gaussianNB
+aryane@saganclassifiers$ python naivebayes_cv.py cb-no-label cb-labels
+Accuracy: 0.49 (+/- 0.02)
+('acc pred ', 0.48851774530271397)
+
+max_depth=10 (10-12 mesmo efeito)
+max_features=24
+aryane@saganclassifiers$ python dtree_cv.py cb-no-label cb-labels
+Accuracy: 0.68 (+/- 0.02)
+('acc pred ', 0.67816723436984949)
+

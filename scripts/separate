@@ -1,0 +1,6 @@
+sort --random-sort complete_base > temp
+mv temp complete_base
+total=$(head -1 complete_base | wc -w)
+((n_features = total - 1))
+cat complete_base | cut -d' ' -f$total > cb-labels
+cat complete_base | cut -d' ' -f1-$n_features > cb-no-label
