@@ -18,6 +18,10 @@
 \graphicspath{ {images/} }
 \usepackage[brazil]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{multicol}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
 
 \begin{document}
 
@@ -59,21 +63,22 @@ problema de aprendizagem supervisionada, cujo objetivo é realizar inferências 
 partir de um conjunto de dados rotulados, em oposição à aprendizagem
 não-supervisionada.
 
-Este relatório se propõe a apresentar resultados obtidos com os
-classificadores \emph{K Nearest Neighbors} (KNN), \emph{Naive Bayes}, Árvores de
-Decisão e \emph{Support Vector Machines} (SVM) para um problema de classificação de
-imagens, cuja base rotulada possui 1901 imagens divididas 9 classes diferentes.
-Os algoritmos de classificação não utilizam as imagens "brutas", sendo necessário, então, converter as imagens do formato JPG para vetores de características
-que os algoritmos de classificação possam utilizar.
+Este relatório se propõe a apresentar resultados obtidos com os classificadores
+\emph{K Nearest Neighbors} (KNN), Árvores de Decisão e \emph{Support Vector
+Machines} (SVM) para um problema de classificação de imagens, cuja base
+rotulada possui 1901 imagens divididas 9 classes diferentes.  Os algoritmos de
+classificação não utilizam as imagens "brutas", sendo necessário, então,
+converter as imagens do formato JPG para vetores de características que os
+algoritmos de classificação possam utilizar.
 
-Após extraído os vetores de características das imagens, foram realizadas
-as execuções dos classificadores KNN, Naive Bayes, Árvores de Decisão e SVM. As
-implementações dos algoritmos mencionados são da biblioteca Scikit Learn (ref).
+Após extraído os vetores de características das imagens, foram realizadas as
+execuções dos classificadores KNN, Árvores de Decisão e SVM. As implementações
+dos algoritmos mencionados são da biblioteca Scikit Learn (ref).
 
 Nas seções a seguir são apresentados maiores detalhes da representação,
-algoritmos utilizados, métricas para comparação e desempenho.
-São comparados também o desempenho de estratégias de combinação de
-classificadores e \emph{ensembles}.
+algoritmos utilizados, métricas para comparação e desempenho.  São comparados
+também o desempenho de estratégias de combinação de classificadores e
+\emph{ensembles}.
 
 \section{Representação dos dados}
 
@@ -86,15 +91,20 @@ Para a extração dos vetores de caracteristicas, foram utilizados os algoritmos
 final da linha.
 
 \subsection{Local Binary Patterns}
-Breve explicação. Método uniforme, raio=2, n\_point ou vizinhos = 16,
+
+O LBP (Local Binary Patterns) baseia-se no fato de que certos padrões locais à
+região de vizinhança de um pixeil são propriedades fundamentais da textura de
+uma imagem.
+
+o método uniforme, com raio 2 e n\_point ou vizinhos igual a 16
+Método uniforme, raio=2, n\_point ou vizinhos = 16,
 implementação do scikit learn.
 
 \subsection{Grey-Level Co-Occurrence Matrix}
 
-Breve explicação.
-
-Características utilizadas: correlação, dissimilarity, contrast, homogeneity,
-energy, ASM.
+A matriz de co-ocorrência utiliza informações sobre a posição relativa dos
+pixels em relação uns aos outros. Foram utilizadas as características de
+correlação, dissimilaridade, contrast, homogeneidade, energia, e ASM.
 %http://scikit-image.org/docs/dev/api/skimage.feature.html#skimage.feature.greycoprops
 
 \section{Classificação}
@@ -136,17 +146,28 @@ folds de validação cruzada foi 5. A média de acurácia foi de 0,51 com margem
 erro de 0,01.
 
 
-\subsection{Naive Bayes}
-
-Naive Bayes é um método que utiliza uma abordagem probabilística para a
-aprendizagem supervisionada ao aplicar o Teorema de Bayes ao problema. É
-considerado ingênuo (naive) por assume independência entre as características.
+%\subsection{Naive Bayes}
+%
+%Naive Bayes é um método que utiliza uma abordagem probabilística para a
+%aprendizagem supervisionada ao aplicar o Teorema de Bayes ao problema. É
+%considerado ingênuo (naive) por assume independência entre as características.
 
 
 \subsection{Árvores de decisão}
 
-Breve explicação
+Em um classificador de Árvore de decisão, o objetivo é criar um modelo que
+prediz o valor de variáveis a partir da aprendizagem de regras de decisão
+inferidas dos dados. Em cada nó, é representado um atributo, que implica numa
+decisão. Cada ramo corresponde a um possível valor deste atributo. Cada folha
+está associada à uma classe e os percursos na árvore é uma regra de
+classificação.
 
+Árvores de decisão tem a vantagem de serem simmples de entender e visualizar.
+Por outro lado, é possível que seja gerada uma árvore complexa e especialista,
+o que leva à overfitting. Definindo uma profundidade máxima para a árvore e um
+limite para características utilizadas, é possível contornar este problema.
+Neste trabalho, foi adotado a profundidade máxima de 10, e como o número de
+características é baixo, não se fez necessário limitá-lo.
 
 \subsection{SVM}
 
@@ -182,7 +203,7 @@ quantidade de árvores de decisão da floresta. Intuitivamente, quando mais
 árvores, melhor o resultado, apesar de levar mais tempo para executar o
 algoritmo. Porém, ao executar o classificar para números de estimadores
 variando entre 10 e 100, foi possível observar que a média de acurácia, pois se
-trabalhou com validação cruzada, foi de 0,79, com tolerância de 0,01 para
+trabalhou com validação cruzada, foi de 0,79, com desvio padrão de 0,01 para
 números de estimadores a partir de 59 até 100. E como o algoritmo roda muito
 mais rápido com um número menor de árvores, 59 foi o n\_estimatores escolhido.
 
@@ -192,44 +213,88 @@ raiz quadrada do número de características gera bons resultados, que neste cas
 seria próximo de 5. Obtive as melhores médias de acurácia para max\_depth
 variando de 5 a 19.
 
-\section{Teste de Wilcoxon}
+\section{Resultados}
 
-O teste de Wilcoxon é um teste de hipóteses que 
+A árvore de decisão, sem limite de características, uma vez que são apenas 24, e com limite de profundidade 10, produziu 10 scores da validação cruzada, exibidos na figura~\ref{fig:dtree}, cuja média da acurácia foi 0.68 e desvio padrão de 0.007467.
 
-\section{Considerações Finais}
+\begin{figure}[htb]\caption{Árvore de decisão}\label{fig:dtree}
+  \begin{tt}\noindent
+   %DecisionTreeClassifier(class\_weight = None, criterion = 'gini', max\_depth = 10, max\_features = 24, max\_leaf\_nodes = None, min\_impurity\_split = 1e-07, min\_samples\_leaf = 1, min\_samples\_split = 2, min\_weight\_fraction\_leaf = 0.0, presort = False, random\_state = None, splitter = 'best'),
+  \begin{multicols}{3}
+  Scores:\\
+    0.66273002\\
+    0.67673716\\
+    0.67948366\\
+    0.67838506\\
+    0.66712442\\
+    0.67206811\\
+    0.67508926\\
+    0.6896457\\
+    0.6858006\\
+    0.67481461\\
+  \end{multicols}
+  Acurácia média: 0.68 (+/- 0.02)\\
+  Desvio padrão: 0.007467
+  \end{tt}
+\end{figure}
 
-Podemos perceber que.
-Todo o código utilizado no projeto, inclusos ..., pode ser encontrado num
-repositório Git hospedado no GitHub ....
+Já para o KNN, a acurácia média foi de 0.51 e desvio padrão deDesvio padrão: 0.006410, como pode ser visto na figura~\ref{fig:knn}.
 
-%\section{Introduction}
-%\label{intro}
-%\input{sections/1_introduction.tex}
-%
-%%example for Bullet point list
-%
-%\begin{itemize}
-%\item example
-%\end {itemize}
-%
-%%example for numbered list
-%    \begin{enumerate}
-%    \item example
-%    \end{enumerate}
-%
-%%example for inserting image
-%\begin{figure}[h]
-%   \centering
-%   \includegraphics[scale=.45]{OWL2}
-%    \caption{The structure of OWL2}
-%    \label{fig:OWL2}
-%\end{figure}
-%
-%\section{Conclusion}
-%\label {conclusion}
-%\input{sections/5_conclusion.tex}
-%
-%\bibliographystyle{IEEEtran}
-%\bibliography{bibliography}
+\begin{figure}[htb]\caption{KNN}\label{fig:knn}
+  \begin{tt}\noindent
+  \begin{multicols}{3}
+  Scores:\\
+  0.51167262\\  0.51139797\\  0.50425707\\  0.49903873\\  0.49189783\\  0.50892612\\
+  0.51029937\\  0.50755287\\  0.51139797\\  0.51304587\\
+  \end{multicols}
+  Acurácia média: 0.51 (+/- 0.01)\\
+  Desvio padrão: 0.006410
+  \end{tt}
+\end{figure}
+
+Random forests com acurácia média de 0.79 com desvio padrão de 0.007549 na figura~\ref{fig:random_forests}, para 59 estimadores (árvores) e limite de características de 5.
+
+\begin{figure}[htb]\caption{Random Forests}\label{fig:random_forests}
+  \begin{tt}\noindent
+  \begin{multicols}{3}
+  Scores:\\
+ 0.7761604\\   0.79318868\\  0.78714639\\  0.78028014\\  0.77808294\\  0.78989289\\
+  0.78934359\\  0.78742104\\  0.78687174\\  0.79511123\\
+Acurácia média: 0.79 (+/- 0.01)\\
+Desvio padrão: 0.007549
+  \end{multicols}
+  \end{tt}
+\end{figure}
+
+SVM com kernel linear, gama=2, C=46, estratégia multi-classe de um-contra-todos
+e classes balanceadas, resultou em acurácia média de 0.73 com desvio padrão de
+0.005181, pode ser visto na figura~\ref{fig:svm_linear}.
+
+\begin{figure}[htb]\caption{SVM Linear}\label{fig:svm_linear}
+  \begin{tt}\noindent
+  \begin{multicols}{3}
+Scores:\\
+ 0.73606152\\  0.73578687\\  0.73551222\\  0.72946993\\  0.72589948\\  0.73358967\\
+  0.74622356\\  0.73139247\\  0.73523757\\  0.73853337\\
+  \end{multicols}
+Acurácia média: 0.73 (+/- 0.01)\\
+Desvio padrão: 0.005181
+  \end{tt}
+\end{figure}
+
+Por fim, juntei os dois métodos com melhores resultados, SVM e Random Forests, utilizando o classificador VotingClassifier. Os resultados podem ser observados na figura~\ref{fig:voting}.
+
+\begin{figure}[htb]\caption{SVM Linear}\label{fig:voting}
+  \begin{tt}\noindent
+  \begin{multicols}{3}
+Scores:\\
+0.75254051\\  0.75336446\\  0.75720956\\  0.74237847\\  0.74045592\\  0.75583631\\
+  0.76599835\\  0.75556166\\  0.74897006\\  0.76215325\\
+  \end{multicols}
+Acurácia média: 0.75 (+/- 0.02)
+  \end{tt}
+\end{figure}
+
+Senti que mesclar os classificadores, ao invés de melhorar o resultado, apenas oferece um desempenho médio entre os dois.
 
 \end{document}

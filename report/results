@@ -1,0 +1,37 @@
+Decision tree
+[ 0.66190607  0.67838506  0.67865971  0.67591321  0.66053282  0.67261741
+  0.67234276  0.69266685  0.68607525  0.66877232]
+Acurácia média: 0.67 (+/- 0.02)
+Desvio padrão: 0.009446
+KNN
+[ 0.51167262  0.51139797  0.50425707  0.49903873  0.49189783  0.50892612
+  0.51029937  0.50755287  0.51139797  0.51304587]
+Acurácia média: 0.51 (+/- 0.01)
+Desvio padrão: 0.006410
+Random forests
+[ 0.78769569  0.79263938  0.77863224  0.7739632   0.7750618   0.79318868
+  0.79209009  0.79318868  0.78687174  0.79428728]
+Acurácia média: 0.79 (+/- 0.02)
+Desvio padrão: 0.007549
+SVM
+[ 0.70200494  0.6962373   0.6912936   0.6912936   0.6918429   0.70420214
+  0.70859654  0.70145564  0.70365284  0.70694864]
+Acurácia média: 0.70 (+/- 0.01)
+Desvio padrão: 0.006253
+Linear kernel SVM
+[ 0.73606152  0.73578687  0.73551222  0.72946993  0.72589948  0.73358967
+  0.74622356  0.73139247  0.73523757  0.73853337]
+Acurácia média: 0.73 (+/- 0.01)
+Desvio padrão: 0.005181
+VotingClassifier(estimators=[('rf', RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=None, max_features=5, max_leaf_nodes=None,
+            min_impurity_split=1e-07, min_samples_leaf=1,
+            min_samples_split=2, min_weight_fraction_leaf=0.0,
+            n_estim...',
+  max_iter=-1, probability=True, random_state=None, shrinking=True,
+  tol=0.001, verbose=False))],
+         n_jobs=1, voting='hard', weights=None)
+[ 0.75254051  0.75336446  0.75720956  0.74237847  0.74045592  0.75583631
+  0.76599835  0.75556166  0.74897006  0.76215325]
+Acurácia média: 0.75 (+/- 0.02)
+
