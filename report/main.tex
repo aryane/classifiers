@@ -284,7 +284,7 @@ Desvio padrão: 0.005181
 
 Por fim, juntei os dois métodos com melhores resultados, SVM e Random Forests, utilizando o classificador VotingClassifier. Os resultados podem ser observados na figura~\ref{fig:voting}.
 
-\begin{figure}[htb]\caption{SVM Linear}\label{fig:voting}
+\begin{figure}[htb]\caption{Voting Classifier}\label{fig:voting}
   \begin{tt}\noindent
   \begin{multicols}{3}
 Scores:\\
@@ -295,6 +295,15 @@ Acurácia média: 0.75 (+/- 0.02)
   \end{tt}
 \end{figure}
 
-Senti que mesclar os classificadores, ao invés de melhorar o resultado, apenas oferece um desempenho médio entre os dois.
+Ao mesclar os classificadores, no caso apresentado, a média de acurácia, ao
+invés de melhorar, ficou próxima da média entre os valores médios do SVM e
+Random Forests. Assim sendo, é preferível ficar apenas com o método de Random
+Forests.
+
+Do KNN às Random Forests, obteve-se uma melhora sensível de desempenho. Ainda
+assim, um erro de 0.21 é muito alto. Atribuo isso à representação, uma vez que
+se ela não for boa o suficiente, ou seja, bastante similar para objetos de uma
+mesma classe e bastante diferente para objetos de classes distintas, não muito
+que os classificadores possam fazer.
 
 \end{document}
